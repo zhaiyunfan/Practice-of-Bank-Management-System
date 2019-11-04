@@ -8,24 +8,24 @@ int main()
 
 	//建立几个账户
 
-	SavingsAccount sa0(1, 21325302, 0.015);
-	SavingsAccount sa1(1, 58320212, 0.015);
+	SavingsAccount sa0(19970324, 21325302, 0.015);
+	SavingsAccount sa1(19740324, 58320212, 0.015);
 
 
 
 	//几笔账目
 
-	sa0.deposit(5, 5000);
-	sa1.deposit(25, 10000);
-	sa0.deposit(45, 5500);
-	sa1.withdraw(60, 4000);
+	sa0.deposit(19740324, 5000);
+	/*sa1.deposit(19990324, 10000);*/
+	sa0.deposit(20190324, 5500);
+	sa1.withdraw(20190324, 4000);
 
 
 
 	//开户后第90天到了银行的计息日，结算所有账户的年息
 
-	sa0.settle(90);
-	sa1.settle(90);
+	sa0.settle(20190324);
+	sa1.settle(20190324);
 
 
 
