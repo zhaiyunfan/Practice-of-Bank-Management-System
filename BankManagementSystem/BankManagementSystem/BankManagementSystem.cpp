@@ -7,16 +7,17 @@ int main()
 {
 
 	//建立几个账户
-
-	SavingsAccount sa0(19970324, 21325302, 0.015);
-	SavingsAccount sa1(19740324, 58320212, 0.015);
+	string id0 = "21325302";
+	string id1 = "58320212";
+	SavingsAccount sa0(19970324, id0, 0.015);
+	SavingsAccount sa1(19740324, id1, 0.015);
 
 
 
 	//几笔账目
 
 	sa0.deposit(19740324, 5000);
-	/*sa1.deposit(19990324, 10000);*/
+	sa1.deposit(19990324, 10000);
 	sa0.deposit(20190324, 5500);
 	sa1.withdraw(20190324, 4000);
 
@@ -26,7 +27,7 @@ int main()
 
 	sa0.settle(20190324);
 	sa1.settle(20190324);
-
+	cout << SavingsAccount::getTotal() << endl;
 
 
 	//输出各个账户信息

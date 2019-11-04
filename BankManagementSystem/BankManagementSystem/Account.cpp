@@ -1,4 +1,4 @@
-﻿#include "Account.h"
+﻿#include"Account.h"
 
 bool SavingsAccount::record(int date, double amount)
 {
@@ -109,7 +109,7 @@ int SavingsAccount::lastDateCal(int newDate)		//一个日期计算器，返回ne
 	}
 }
 
-SavingsAccount::SavingsAccount(int inDate, int inId, double inRate)
+SavingsAccount::SavingsAccount(int inDate, string& inId, double inRate)
 {
 	lastDate = inDate;
 	id = inId;
@@ -125,6 +125,7 @@ void SavingsAccount::show()
 	cout << "id:" << id << endl;
 	cout << "accumulation:" << accumulation << endl;
 	cout << "balance:" << balance << endl;
+	cout << "total:" << total << endl;
 	cout << "------------------------------------------" << endl;
 }
 
@@ -133,6 +134,7 @@ bool SavingsAccount::deposit(int date, double amount)
 	accumulation += accumulate(date);	//将现有利息结算并存入利息池
 	lastDate = date;						//更新存入日期
 	balance += amount;					//向余额存入
+	total += amount;
 	return true;
 }
 
@@ -146,6 +148,7 @@ bool SavingsAccount::withdraw(int date, double amount)
 	accumulation += accumulate(date);	//将现有利息结算并存入利息池
 	lastDate = date;						//更新存入日期
 	balance -= amount;					//从余额取出
+	total -= amount;
 	return true;
 }
 
@@ -154,7 +157,9 @@ bool SavingsAccount::settle(int date)
 	accumulation += accumulate(date);	//将现有利息结算并存入利息池
 	lastDate = date;						//更新存入日期
 	balance += accumulation;				//将利息池的利息存入余额
+	total += accumulation;
 	accumulation = 0;					//清空利息池
 	return true;
 }
 
+double SavingsAccount::total = 0;
