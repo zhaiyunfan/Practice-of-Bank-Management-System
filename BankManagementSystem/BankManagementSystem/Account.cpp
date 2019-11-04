@@ -1,4 +1,4 @@
-#include "Account.h"
+ï»¿#include "Account.h"
 
 bool SavingsAccount::record(int date, double amount)
 {
@@ -14,7 +14,7 @@ double SavingsAccount::accumulate(int date)
 	return profit;
 }
 
-int SavingsAccount::monthTable(int year, int month)	//Ò»¸ö±í£¬·µ»ØÖµnormalYearÎªËù¸øÄêÔÂµÄ1ÈÕÊÇ¸ÃÄêµÄµÚ(normalYear-1)Ìì
+int SavingsAccount::monthTable(int year, int month)	//ä¸€ä¸ªè¡¨ï¼Œè¿”å›å€¼normalYearä¸ºæ‰€ç»™å¹´æœˆçš„1æ—¥æ˜¯è¯¥å¹´çš„ç¬¬(normalYear-1)å¤©
 {
 	int normalYear = 0;
 	switch (month)
@@ -46,7 +46,7 @@ int SavingsAccount::monthTable(int year, int month)	//Ò»¸ö±í£¬·µ»ØÖµnormalYearÎª
 	default:
 		break;
 	}
-	if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))	//´¦ÀíÈòÄê
+	if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))	//å¤„ç†é—°å¹´
 	{
 		if (month > 2)
 		{
@@ -56,7 +56,7 @@ int SavingsAccount::monthTable(int year, int month)	//Ò»¸ö±í£¬·µ»ØÖµnormalYearÎª
 	return normalYear;
 }
 
-int SavingsAccount::lastDateCal(int newDate)		//Ò»¸öÈÕÆÚ¼ÆËãÆ÷£¬·µ»ØnewDateÓëlastDateÖĞ¼ä¼ä¸ôµÄÌìÊı
+int SavingsAccount::lastDateCal(int newDate)		//ä¸€ä¸ªæ—¥æœŸè®¡ç®—å™¨ï¼Œè¿”å›newDateä¸lastDateä¸­é—´é—´éš”çš„å¤©æ•°
 {
 	int tmpLastPart = 0;
 	int tmpNewPart = 0;
@@ -94,12 +94,12 @@ int SavingsAccount::lastDateCal(int newDate)		//Ò»¸öÈÕÆÚ¼ÆËãÆ÷£¬·µ»ØnewDateÓëlas
 	}
 	else
 	{
-		result += (365 - monthTable(lastYear, lastMonth) - lastDay);									//¼ÓÉÏµÚÒ»ÄêÊ£ÏÂµÄÈÕ×Ó
-		result += monthTable(newYear, newMonth) + newDay;											//¼ÓÉÏ×îºóÒ»ÄêÒÑ¶È¹ıµÄÈÕ×Ó
-		if ((lastYear % 400 == 0 || (lastYear % 4 == 0 && lastYear % 100 != 0)) && lastMonth <= 2)	//×îºóÒ»ÄêÊÇÈòÄêÇÒ¹ı¶şÔÂ£¬+1
+		result += (365 - monthTable(lastYear, lastMonth) - lastDay);									//åŠ ä¸Šç¬¬ä¸€å¹´å‰©ä¸‹çš„æ—¥å­
+		result += monthTable(newYear, newMonth) + newDay;											//åŠ ä¸Šæœ€åä¸€å¹´å·²åº¦è¿‡çš„æ—¥å­
+		if ((lastYear % 400 == 0 || (lastYear % 4 == 0 && lastYear % 100 != 0)) && lastMonth <= 2)	//æœ€åä¸€å¹´æ˜¯é—°å¹´ä¸”è¿‡äºŒæœˆï¼Œ+1
 		{
 			result += 1;
-			for (int i = lastYear + 1; i < newYear; i++)													//¼ÓÉÏÖĞ¼äµÄÄê£¬¼ÆËãÆ½ÈòÄê
+			for (int i = lastYear + 1; i < newYear; i++)													//åŠ ä¸Šä¸­é—´çš„å¹´ï¼Œè®¡ç®—å¹³é—°å¹´
 			{
 				result += monthTable(i, 12);
 				result += 31;
@@ -130,9 +130,9 @@ void SavingsAccount::show()
 
 bool SavingsAccount::deposit(int date, double amount)
 {
-	accumulation += accumulate(date);	//½«ÏÖÓĞÀûÏ¢½áËã²¢´æÈëÀûÏ¢³Ø
-	lastDate = date;						//¸üĞÂ´æÈëÈÕÆÚ
-	balance += amount;					//ÏòÓà¶î´æÈë
+	accumulation += accumulate(date);	//å°†ç°æœ‰åˆ©æ¯ç»“ç®—å¹¶å­˜å…¥åˆ©æ¯æ± 
+	lastDate = date;						//æ›´æ–°å­˜å…¥æ—¥æœŸ
+	balance += amount;					//å‘ä½™é¢å­˜å…¥
 	return true;
 }
 
@@ -140,21 +140,21 @@ bool SavingsAccount::withdraw(int date, double amount)
 {
 	if (amount > balance)
 	{
-		cout << "¼¸Á£»¨ÉúÃ×°¡£¿°ÑÄã×í³ÉÕâÑùÁË¾Í£¿" << endl;
+		cout << "å‡ ç²’èŠ±ç”Ÿç±³å•Šï¼ŸæŠŠä½ é†‰æˆè¿™æ ·äº†å°±ï¼Ÿ" << endl;
 		return false;
 	}
-	accumulation += accumulate(date);	//½«ÏÖÓĞÀûÏ¢½áËã²¢´æÈëÀûÏ¢³Ø
-	lastDate = date;						//¸üĞÂ´æÈëÈÕÆÚ
-	balance -= amount;					//´ÓÓà¶îÈ¡³ö
+	accumulation += accumulate(date);	//å°†ç°æœ‰åˆ©æ¯ç»“ç®—å¹¶å­˜å…¥åˆ©æ¯æ± 
+	lastDate = date;						//æ›´æ–°å­˜å…¥æ—¥æœŸ
+	balance -= amount;					//ä»ä½™é¢å–å‡º
 	return true;
 }
 
 bool SavingsAccount::settle(int date)
 {
-	accumulation += accumulate(date);	//½«ÏÖÓĞÀûÏ¢½áËã²¢´æÈëÀûÏ¢³Ø
-	lastDate = date;						//¸üĞÂ´æÈëÈÕÆÚ
-	balance += accumulation;				//½«ÀûÏ¢³ØµÄÀûÏ¢´æÈëÓà¶î
-	accumulation = 0;					//Çå¿ÕÀûÏ¢³Ø
+	accumulation += accumulate(date);	//å°†ç°æœ‰åˆ©æ¯ç»“ç®—å¹¶å­˜å…¥åˆ©æ¯æ± 
+	lastDate = date;						//æ›´æ–°å­˜å…¥æ—¥æœŸ
+	balance += accumulation;				//å°†åˆ©æ¯æ± çš„åˆ©æ¯å­˜å…¥ä½™é¢
+	accumulation = 0;					//æ¸…ç©ºåˆ©æ¯æ± 
 	return true;
 }
 

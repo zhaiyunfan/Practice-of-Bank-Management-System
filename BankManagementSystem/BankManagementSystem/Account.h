@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include<fstream>
 #include<iostream>
 
@@ -7,13 +7,13 @@ using namespace std;
 class SavingsAccount
 {
 private:
-	int id;					//Î¨Ò»idºÅ£¬²»¿ÉÖØ¸´
-	double accumulation;		//ÀûÏ¢Á¿	
-	double balance;			//Óà¶î
-	double rate;				//ÄêÀûÂÊ
+	int id;					//å”¯ä¸€idå·ï¼Œä¸å¯é‡å¤
+	double accumulation;		//åˆ©æ¯é‡	
+	double balance;			//ä½™é¢
+	double rate;				//å¹´åˆ©ç‡
 	int lastDate;			//
 
-	bool record(int date, double amount);	//Ç¿ÖÆÖÃÊı
+	bool record(int date, double amount);	//å¼ºåˆ¶ç½®æ•°
 
 	double accumulate(int date);
 
@@ -24,9 +24,9 @@ public:
 
 	SavingsAccount(int inDate, int inId, double inRate);
 	void show();
-	bool deposit(int date, double amount);	//´æ¿î
-	bool withdraw(int date, double amount);	//È¡¿î
-	bool settle(int date);					//ÓÚÖ¸¶¨ÈÕÆÚ½áËã
+	bool deposit(int date, double amount);	//å­˜æ¬¾
+	bool withdraw(int date, double amount);	//å–æ¬¾
+	bool settle(int date);					//äºæŒ‡å®šæ—¥æœŸç»“ç®—
 
 	int getId()
 	{
