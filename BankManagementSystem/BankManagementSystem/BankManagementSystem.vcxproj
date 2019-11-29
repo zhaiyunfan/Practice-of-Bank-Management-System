@@ -153,9 +153,11 @@
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="BankManagementSystem.cpp" />
+    <ClCompile Include="Date.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
+    <ClInclude Include="Date.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
