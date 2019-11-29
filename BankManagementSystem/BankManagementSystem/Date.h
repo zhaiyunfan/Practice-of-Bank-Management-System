@@ -1,8 +1,11 @@
 ﻿#pragma once
+#include<string>
+using namespace std;
 class Date
 {
 private:
 	int year, month, day;
+	int monthTable(int year, int month);
 public:
 	Date()
 	{
@@ -17,7 +20,7 @@ public:
 		day = d;
 	}
 	int distanceCal(Date& newDate);
-	int monthTable(int year, int month);
+	string getDateStr();
 	bool dateChange(int y, int m, int d);
 };
 
