@@ -13,7 +13,7 @@ private:
 	double rate;							//年利率		
 public:
 
-	SavingsAccount(Date& inDate, string inId, double inRate);
+	SavingsAccount(Date& inDate, string inId, string inKey, double inRate);
 	bool deposit(Date& date, double amount, string title);	//存款
 	bool withdraw(Date& date, double amount, string title);	//取款
 	bool settle(Date& date);								//于指定日期结算

@@ -8,11 +8,12 @@ using namespace std;
 class Account
 {
 private:
-	string id;				
+	string id;		
+	string key;
 	double balance;
 	static double total;
 public:
-	Account(Date& date, string id);
+	Account(Date& date, string id, string key);
 	bool record(Date& date, double amount, string title);
 	const string& getId() const
 	{
@@ -27,6 +28,7 @@ public:
 		return total;
 	}
 
+	bool keyCheck(string& inKey)const;
 	bool virtual show();
 	bool virtual deposit(Date& date, double amount, string title) = 0;	//存款
 	bool virtual withdraw(Date& date, double amount, string title) = 0;	//取款

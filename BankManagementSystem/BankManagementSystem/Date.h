@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include<string>
+#include<iostream>
 using namespace std;
 class Date
 {
@@ -35,5 +36,6 @@ public:
 		return day;
 	}
 	bool dateChange(int y, int m, int d);
+	bool operator<(const Date d)const;
 };
 

@@ -106,3 +106,29 @@ bool Date::dateChange(int y, int m, int d)
 		return false;
 	}
 }
+
+bool Date::operator<(const Date d) const
+{
+	if (this->year != d.year)
+	{
+		return this->year < d.year;
+	}
+	else
+	{
+		if (this->month != d.month)
+		{
+			return this->month < d.month;
+		}
+		else
+		{
+			if (this->day != d.day)
+			{
+				return this->day < d.day;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+}
