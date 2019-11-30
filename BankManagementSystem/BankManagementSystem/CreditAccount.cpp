@@ -1,22 +1,15 @@
-#include "CreditAccount.h"
+ï»¿#include "CreditAccount.h"
 
 
 CreditAccount::CreditAccount(Date& inDate, string inId, double inLimit,double inRate,double inFee) :Account(inDate, inId), acc(inDate, 0), creditLimit(inLimit),rate(inRate),annualFee(inFee)
 {
-	cout << "#" << inId << " is created" << endl;
+	cout <<"Credit Account"<< "#" << inId << " is created" << endl;
 }
 
 bool CreditAccount::deposit(Date& date, double amount, string title)
 {
-	if (getBalance() >= 0)
-	{
-		record(date, amount, title);
-	}
-	else
-	{
-		record(date, amount, title);
-		acc.set(date, getBalance());
-	}
+	record(date, amount, title);
+	acc.set(date, getDebt());
 	return true;
 }
 
@@ -24,17 +17,13 @@ bool CreditAccount::withdraw(Date& date, double amount, string title)
 {
 	if (getBalance() - amount < -creditLimit)
 	{
-		cout << "Óà¶î²»×ãÇÒÐÅÓÃ¶î¶È²»×ã" << endl;
+		cout << "ä½™é¢ä¸è¶³ä¸”ä¿¡ç”¨é¢åº¦ä¸è¶³" << endl;
 		return false;
 	}
-	else if (getBalance() - amount >= -creditLimit && getBalance() - amount < 0)
+	else 
 	{
 		record(date, -amount, title);
-		acc.set(date, getBalance());
-	}
-	else
-	{
-		record(date, -amount, title);
+		acc.set(date, getDebt());
 	}
 
 	return true;
@@ -42,9 +31,9 @@ bool CreditAccount::withdraw(Date& date, double amount, string title)
 
 bool CreditAccount::settle(Date& date)
 {
-	double interest = rate * acc.cal(date);
+	double interest = rate * acc.calSum(date);
 	record(date, interest, "settle");
-	acc.reset(date, (getBalance() >= 0 ? 0 : getBalance()));
+	acc.reset(date, getDebt());
 	if (date.getMonth() == 1)
 	{
 		record(date, -annualFee, "Annual Fee");

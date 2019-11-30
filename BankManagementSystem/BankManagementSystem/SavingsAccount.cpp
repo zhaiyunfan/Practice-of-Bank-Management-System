@@ -1,14 +1,14 @@
-#include"SavingsAccount.h"
+ï»¿#include"SavingsAccount.h"
 
 SavingsAccount::SavingsAccount(Date& inDate, string inId, double inRate):Account(inDate, inId),rate(inRate), acc(inDate, 0)
 {
-	cout << "#" << inId << " is created" << endl;
+	cout <<"Savings Account"<< "#" << inId << " is created" << endl;
 }
 
 
 bool SavingsAccount::deposit(Date& date, double amount, string title)
 {
-	record(date, amount,title);				//¸üÐÂ´æÈëÈÕÆÚ²¢ÏòÓà¶î´æÈë
+	record(date, amount,title);				//æ›´æ–°å­˜å…¥æ—¥æœŸå¹¶å‘ä½™é¢å­˜å…¥
 	acc.set(date, getBalance());
 	return true;
 }
@@ -17,21 +17,28 @@ bool SavingsAccount::withdraw(Date& date, double amount, string title)
 {
 	if (amount > getBalance())
 	{
-		cout << "¼¸Á£»¨ÉúÃ×°¡£¿°ÑÄã×í³ÉÕâÑùÁË¾Í£¿/nÓà¶î²»×ã£¡" << endl;
+		cout << "å‡ ç²’èŠ±ç”Ÿç±³å•Šï¼ŸæŠŠä½ é†‰æˆè¿™æ ·äº†å°±ï¼Ÿ/nä½™é¢ä¸è¶³ï¼" << endl;
 		return false;
 	}
-	record(date, -amount, title);				//¸üÐÂ´æÈëÈÕÆÚ²¢´ÓÓà¶îÈ¡³ö
+	record(date, -amount, title);				//æ›´æ–°å­˜å…¥æ—¥æœŸå¹¶ä»Žä½™é¢å–å‡º
 	acc.set(date, getBalance());
 	return true;
 }
 
 bool SavingsAccount::settle(Date& date)
 {
-	double inteset = 0;
-	inteset += acc.cal(date) * rate / 365;
-	record(date, inteset,"settle");			//¸üÐÂ´æÈëÈÕÆÚ²¢½«ÀûÏ¢³ØµÄÀûÏ¢´æÈëÓà¶î
-	acc.reset(date,getBalance());				//Çå¿ÕÀûÏ¢³Ø
-	return true;
+	if (date.getMonth() == 1)
+	{
+		double inteset = 0;
+		inteset += acc.calSum(date) * rate / 365;
+		record(date, inteset, "settle");			//æ›´æ–°å­˜å…¥æ—¥æœŸå¹¶å°†åˆ©æ¯æ± çš„åˆ©æ¯å­˜å…¥ä½™é¢
+		acc.reset(date, getBalance());				//æ¸…ç©ºåˆ©æ¯æ± 
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool SavingsAccount::show()

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include<string>
 #include<iostream>
 #include"Date.h"
@@ -26,6 +26,10 @@ public:
 	{
 		return total;
 	}
-	bool show();
+
+	bool virtual show();
+	bool virtual deposit(Date& date, double amount, string title) = 0;	//存款
+	bool virtual withdraw(Date& date, double amount, string title) = 0;	//取款
+	bool virtual settle(Date& date) = 0;											//结算
 };
 
