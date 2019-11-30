@@ -106,3 +106,38 @@ bool Date::dateChange(int y, int m, int d)
 		return false;
 	}
 }
+
+bool Date::operator<(const Date d) const
+{
+	if (this->year != d.year)
+	{
+		return this->year < d.year;
+	}
+	else
+	{
+		if (this->month != d.month)
+		{
+			return this->month < d.month;
+		}
+		else
+		{
+			if (this->day != d.day)
+			{
+				return this->day < d.day;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+}
+
+bool Date::read()
+{
+	cin >> inYear >> inMonth >> inDay;
+	return true;
+}
+int Date::inYear = 0;
+int Date::inMonth = 0;
+int Date::inDay = 0;

@@ -1,7 +1,7 @@
 ﻿#include "CreditAccount.h"
 
 
-CreditAccount::CreditAccount(Date& inDate, string inId, double inLimit,double inRate,double inFee) :Account(inDate, inId), acc(inDate, 0), creditLimit(inLimit),rate(inRate),annualFee(inFee)
+CreditAccount::CreditAccount(Date& inDate, string inId,string inKey, double inLimit,double inRate,double inFee) :Account(inDate, inId,inKey), acc(inDate, 0), creditLimit(inLimit),rate(inRate),annualFee(inFee)
 {
 	cout <<"Credit Account"<< "#" << inId << " is created" << endl;
 }

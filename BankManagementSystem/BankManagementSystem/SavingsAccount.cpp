@@ -1,8 +1,8 @@
 ﻿#include"SavingsAccount.h"
 
-SavingsAccount::SavingsAccount(Date& inDate, string inId, double inRate):Account(inDate, inId),rate(inRate), acc(inDate, 0)
+SavingsAccount::SavingsAccount(Date& inDate, string inId, string inKey, double inRate) :Account(inDate, inId, inKey), rate(inRate), acc(inDate, 0)
 {
-	cout <<"Savings Account"<< "#" << inId << " is created" << endl;
+	cout << "Savings Account" << "#" << inId << " is created" << endl;
 }
 
 

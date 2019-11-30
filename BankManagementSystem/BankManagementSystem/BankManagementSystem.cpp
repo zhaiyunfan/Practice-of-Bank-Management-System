@@ -1,6 +1,7 @@
-﻿#include "SavingsAccount.h"
-#include "CreditAccount.h"
-#include <iostream>
+﻿#include"BankManagementSystem.h"
+#include <vector>
+#include <map>
+#include <utility>
 
 using namespace std;
 
@@ -8,50 +9,190 @@ int main() {
 
 	Date date(2008, 11, 1);//起始日期
 
-	//建立几个账户
+	map<string,Account*> accounts;
+	map<string, Account*>::iterator iter;
+	multimap<Date, string>myBill;
 
-	Account* accounts[4];
+	cout << "Welcome to Bank-Management-System" << endl;
+	cout << "Next is the operating instructions:" << endl;
 
-	accounts[0] = new SavingsAccount(date, string("S3755217"), 0.015);
-	accounts[1] = new SavingsAccount(date, string("02342342"), 0.015);
-
-	accounts[2] = new CreditAccount(date, string("蒋澳然"), 2000, 0.015, 100);
-	accounts[3] = new CreditAccount(date, string("蔡成龙"), 200, 0.015, 100);
-
-
-	const int n = 4;
-
-	//11月份的几笔账目
-	date.dateChange(2008, 11, 5);
-	accounts[0]->deposit(date, 5000, "salary");
-	accounts[2]->deposit(date, 50000, "salary");
-	accounts[3]->withdraw(date, 500, "do something");
-
-	date.dateChange(2008, 11, 25);
-	accounts[1]->deposit(date, 10000, "sell stock 0323");
-	accounts[3]->withdraw(date, 200, "do something");
-	//12月份的几笔账目
-	date.dateChange(2008, 12, 5);
-	accounts[0]->deposit(date, 5500, "salary");
-
-	date.dateChange(2008, 12, 20);
-	accounts[1]->withdraw(date, 4000, "buy a laptop");
-
-
-
-	//结算所有账户并输出各个账户信息
-
-
-
-	date.dateChange(2009, 1, 1);
-	for (int i = 0; i < n; i++) 
-	{
-		accounts[i]->settle(date);
-		accounts[i]->show();
-	}
-
-	cout << "Total: " << SavingsAccount::getTotal() << endl;
-
+	char command;
+	bool isLoginin = false;
+	Account* p = NULL;
+	double myAmount;
+	string id, key, title;
+	do
+	{		
+		if (isLoginin)
+		{
+			cout << "(d)deposit (w)withdraw (s)show (q)query (c)change day (n)next month (o)logout" << endl;
+			cin >> command;
+			switch (command)
+			{
+			case 'd':
+			{
+				cout << "press amount and title" << endl;
+				cin >> myAmount;
+				getchar();
+				getline(cin, title);
+				p->deposit(date, myAmount, title);
+				myBill.insert(pair<Date, string>(date, getBillStr(date, myAmount, title, p)));
+				break;
+			}
+			case'w':
+			{
+				cout << "press amount and title" << endl;
+				cin >> myAmount;
+				getchar();
+				getline(cin, title);
+				p->withdraw(date, myAmount, title);
+				myBill.insert(pair<Date, string>(date, getBillStr(date, -myAmount, title, p)));
+				break;
+			}
+			case's':
+			{
+				p->show();
+				break;
+			}
+			case'q':
+			{
+				cout << "press a date:" << endl;
+				int inYear, inMonth, inDay;
+				cin >> inYear >> inMonth >> inDay;
+				auto billIter = myBill.equal_range(Date(inYear, inMonth, inDay));
+				if (billIter.first != end(myBill))
+				{
+					for (auto pr = billIter.first; pr != billIter.second; ++pr)
+					{
+						cout << pr->second << endl;
+					}
+				}
+				break;
+			}
+			case'c':
+			{
+				cout << "press goal day:";
+				int myDay;
+				cin >> myDay;
+				if (!date.dateChange(date.getYear(), date.getMonth(), myDay))
+				{
+					cout << "can not return to previous day!" << endl;
+				}
+				break;
+			}
+			case'n':
+			{
+				if (date.getMonth() == 12)
+				{
+					if (!date.dateChange(date.getYear() + 1, 1, 1))
+					{
+						cout << "can not return to previous day!" << endl;
+					}
+					else
+					{
+						cout << "now is" << date.getDateStr() << endl;
+						p->settle(date);
+					}
+				}
+				else
+				{
+					if (!date.dateChange(date.getYear(), date.getMonth() + 1, 1))
+					{
+						cout << "can not return to previous day!" << endl;
+					}
+					else
+					{
+						cout << "now is" << date.getDateStr() << endl;
+						p->settle(date);
+					}
+				}
+				break;
+			}
+			case'o':
+			{
+				p = NULL;
+				isLoginin = false;
+				cout << "logout successful!" << endl;
+				break;
+			}
+			default: 
+			{
+				cout << "wrong commnd,return to menu!" << endl;
+				break; 
+			}
+			}
+		}
+		else
+		{
+			cout << "(a)add account (l)login (e)exit" << endl;
+			cin >> command;
+			switch (command)
+			{
+			case 'a':
+				cout << "please press id and key:" << endl;
+				cin >> id >> key;
+				iter = accounts.find(id);
+				if (iter != accounts.end())
+				{
+					cout << "already created!return to menu!" << endl;
+				}
+				else
+				{
+					cout << "which type of Account?" << endl << "1.SavingsAccount\t2.CreditAccount" << endl;
+					int type;
+					cin >> type;
+					switch (type)
+					{
+					case 1:
+						cout << "press rate:" << endl;
+						double sRate;
+						cin >> sRate;
+						accounts.insert(pair<string, Account*>(id, new SavingsAccount(date, id, key, sRate)));
+						break;
+					case 2:
+						cout << "press creditLimit rate fee:" << endl;
+						double mylimit, myrate, myfee;
+						cin >> mylimit >> myrate >> myfee;
+						accounts.insert(pair<string, Account*>(id, new CreditAccount(date, id, key, mylimit, myrate, myfee)));
+						break;
+					default:
+						cout << "wrong commnd,return to menu!" << endl;
+						break;
+					}					
+				}
+				break;
+			case 'l':
+				cout << "please press id and key:" << endl;
+				cin >> id >> key;
+				iter = accounts.find(id);
+				if (iter != accounts.end())
+				{
+					if((iter->second)->keyCheck(key))
+					{
+						cout << "login successfully!return to menu!" << endl;
+						isLoginin = true;
+						p = iter->second;
+					}
+					else
+					{
+						cout << "wrong key!Do not Find this account!return to menu!" << endl;
+					}
+				}
+				else
+				{
+					cout << "wrong id!Do not Find this account!return to menu!" << endl;
+				}
+				break;
+			case'e':
+				cout << "goodbye!" << endl << "system close!" << endl;
+				break;
+			default:
+				cout << "wrong commnd,return to menu!" << endl;
+				break;
+			}
+		}
+		cin.clear();
+		cin.sync();
+	} while (command != 'e');
 	return 0;
-
 }

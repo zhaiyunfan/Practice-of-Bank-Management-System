@@ -12,7 +12,7 @@ private:
 		return (getBalance() >= 0 ? 0 : getBalance());
 	}
 public:
-	CreditAccount(Date& inDate, string inId, double inLimit,double inRate,double inFee);
+	CreditAccount(Date& inDate, string inId, string key,double inLimit,double inRate,double inFee);
 	bool deposit(Date& date, double amount, string title);	//存款
 	bool withdraw(Date& date, double amount, string title);	//取款
 	bool settle(Date& date);								//于指定日期结算

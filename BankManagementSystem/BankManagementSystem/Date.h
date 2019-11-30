@@ -1,11 +1,13 @@
 ﻿#pragma once
 #include<string>
+#include<iostream>
 using namespace std;
 class Date
 {
 private:
 	int year, month, day;
 	int monthTable(int year, int month);
+	static int inYear, inMonth, inDay;
 public:
 	Date()
 	{
@@ -35,5 +37,7 @@ public:
 		return day;
 	}
 	bool dateChange(int y, int m, int d);
+	bool operator<(const Date d)const;
+	static bool read();
 };
 
