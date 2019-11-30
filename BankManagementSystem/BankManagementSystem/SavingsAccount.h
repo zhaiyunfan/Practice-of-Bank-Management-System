@@ -19,7 +19,7 @@ public:
 	bool settle(Date& date);								//于指定日期结算
 	bool show();
 
-	const double getRate()
+	const double getRate() const
 	{
 		return rate;
 	}

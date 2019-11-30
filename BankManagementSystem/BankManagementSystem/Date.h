@@ -20,16 +20,17 @@ public:
 		day = d;
 	}
 	int distanceCal(Date& newDate);
-	string getDateStr();
-	int getYear()
+	string getDateStr();					//返回格式化的日期字符串，用于日期打印等处
+	
+	int getYear()  const
 	{
 		return year;
 	}
-	int getMonth()
+	int getMonth() const
 	{
 		return month;
 	}
-	int getDay()
+	int getDay() const
 	{
 		return day;
 	}

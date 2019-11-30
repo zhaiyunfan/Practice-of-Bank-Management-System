@@ -14,11 +14,11 @@ private:
 public:
 	Account(Date& date, string id);
 	bool record(Date& date, double amount, string title);
-	string& getId()
+	const string& getId() const
 	{
 		return id;
 	}
-	double getBalance()
+	double getBalance() const
 	{
 		return balance;
 	}

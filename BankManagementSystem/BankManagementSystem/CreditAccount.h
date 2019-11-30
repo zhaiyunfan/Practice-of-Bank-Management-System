@@ -13,15 +13,15 @@ public:
 	bool withdraw(Date& date, double amount, string title);	//取款
 	bool settle(Date& date);								//于指定日期结算
 
-	const double getRate()
+	const double getRate() const
 	{
 		return rate;
 	}
-	const double getCreditLimit()
+	const double getCreditLimit() const
 	{
 		return creditLimit;
 	}
-	const double getAnnualFee()
+	const double getAnnualFee() const
 	{
 		return annualFee;
 	}

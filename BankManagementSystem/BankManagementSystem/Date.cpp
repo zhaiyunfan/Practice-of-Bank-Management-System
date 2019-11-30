@@ -15,21 +15,21 @@ int Date::distanceCal(Date& newDate)	//一个日期计算器，返回newDate与l
 	}
 	if (yearLong == 0)
 	{
-		int newDayNumber = Date::monthTable(newDate.year, newDate.month) + newDate.day;
-		int lastDayNumber = Date::monthTable(this->year, this->month) + this->day;
+		int newDayNumber = monthTable(newDate.year, newDate.month) + newDate.day;
+		int lastDayNumber = monthTable(this->year, this->month) + this->day;
 		result = newDayNumber - lastDayNumber;
 		return result;
 	}
 	else
 	{
-		result += (365 - Date::monthTable(this->year, this->month) - this->day);									//加上第一年剩下的日子
+		result += (monthTable(this->year, 12) + 31 - monthTable(this->year, this->month) - this->day);								//加上第一年剩下的日子
 		result += monthTable(newDate.year, newDate.month) + newDate.day;											//加上最后一年已度过的日子
 		if ((newDate.year % 400 == 0 || (newDate.year % 4 == 0 && newDate.year % 100 != 0)) && newDate.month <= 2)	//最后一年是闰年且过二月，+1
 		{
 			result += 1;
 			for (int i = this->year + 1; i < newDate.year; i++)														//加上中间的年，计算平闰年
 			{
-				result += Date::monthTable(i, 12);
+				result += monthTable(i, 12);
 				result += 31;
 			}
 		}
@@ -38,7 +38,7 @@ int Date::distanceCal(Date& newDate)	//一个日期计算器，返回newDate与l
 	return -1;
 }
 
-string Date::getDateStr()
+string Date::getDateStr()					//返回格式化的日期字符串
 {
 	string result;
 	string sig = "-";

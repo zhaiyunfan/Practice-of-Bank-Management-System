@@ -2,7 +2,6 @@
 
 Account::Account(Date& date, string id)
 {
-	cout << date.getDateStr() << "\t";
 	Account::id = id;
 	balance = 0;
 }

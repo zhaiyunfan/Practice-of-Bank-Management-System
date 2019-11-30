@@ -38,5 +38,6 @@ bool SavingsAccount::show()
 {
 	cout << "SavingsAccount" << "\t";
 	Account::show();
+	cout << endl;
 	return true;
 }
