@@ -21,6 +21,18 @@ public:
 	}
 	int distanceCal(Date& newDate);
 	string getDateStr();
+	int getYear()
+	{
+		return year;
+	}
+	int getMonth()
+	{
+		return month;
+	}
+	int getDay()
+	{
+		return day;
+	}
 	bool dateChange(int y, int m, int d);
 };
 
