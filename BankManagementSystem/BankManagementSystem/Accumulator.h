@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 #include"Date.h"
-//²ßÂÔÄ£Ê½
+//ç­–ç•¥æ¨¡å¼
 class Accumulator
 {
 private:

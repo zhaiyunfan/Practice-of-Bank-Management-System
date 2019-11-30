@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include<fstream>
 #include<iostream>
 #include<string>
@@ -9,14 +9,14 @@ using namespace std;
 class SavingsAccount :public Account
 {
 private:
-	Accumulator acc;						//ÀÛ¼ÓÆ÷
-	double rate;							//ÄêÀûÂÊ		
+	Accumulator acc;						//ç´¯åŠ å™¨
+	double rate;							//å¹´åˆ©ç‡		
 public:
 
 	SavingsAccount(Date& inDate, string inId, double inRate);
-	bool deposit(Date& date, double amount, string title);	//´æ¿î
-	bool withdraw(Date& date, double amount, string title);	//È¡¿î
-	bool settle(Date& date);								//ÓÚÖ¸¶¨ÈÕÆÚ½áËã
+	bool deposit(Date& date, double amount, string title);	//å­˜æ¬¾
+	bool withdraw(Date& date, double amount, string title);	//å–æ¬¾
+	bool settle(Date& date);								//äºæŒ‡å®šæ—¥æœŸç»“ç®—
 	bool show();
 
 	const double getRate() const

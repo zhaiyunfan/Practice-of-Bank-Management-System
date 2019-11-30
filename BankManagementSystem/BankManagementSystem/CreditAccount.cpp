@@ -1,4 +1,4 @@
-#include "CreditAccount.h"
+ï»¿#include "CreditAccount.h"
 
 
 CreditAccount::CreditAccount(Date& inDate, string inId, double inLimit,double inRate,double inFee) :Account(inDate, inId), acc(inDate, 0), creditLimit(inLimit),rate(inRate),annualFee(inFee)
@@ -17,7 +17,7 @@ bool CreditAccount::withdraw(Date& date, double amount, string title)
 {
 	if (getBalance() - amount < -creditLimit)
 	{
-		cout << "Óà¶î²»×ãÇÒÐÅÓÃ¶î¶È²»×ã" << endl;
+		cout << "ä½™é¢ä¸è¶³ä¸”ä¿¡ç”¨é¢åº¦ä¸è¶³" << endl;
 		return false;
 	}
 	else 

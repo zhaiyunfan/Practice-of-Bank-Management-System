@@ -1,4 +1,4 @@
-#include "Accumulator.h"
+﻿#include "Accumulator.h"
 
 double Accumulator::calSum(Date& date)
 {

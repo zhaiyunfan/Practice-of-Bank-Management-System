@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include<string>
 #include<iostream>
 #include"Date.h"
@@ -28,8 +28,8 @@ public:
 	}
 
 	bool virtual show();
-	bool virtual deposit(Date& date, double amount, string title) = 0;	//´æ¿î
-	bool virtual withdraw(Date& date, double amount, string title) = 0;	//È¡¿î
-	bool virtual settle(Date& date) = 0;											//½áËã
+	bool virtual deposit(Date& date, double amount, string title) = 0;	//å­˜æ¬¾
+	bool virtual withdraw(Date& date, double amount, string title) = 0;	//å–æ¬¾
+	bool virtual settle(Date& date) = 0;											//ç»“ç®—
 };
 

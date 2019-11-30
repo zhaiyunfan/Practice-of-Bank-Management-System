@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Account.h"
 class CreditAccount :public Account
 {
@@ -13,9 +13,9 @@ private:
 	}
 public:
 	CreditAccount(Date& inDate, string inId, double inLimit,double inRate,double inFee);
-	bool deposit(Date& date, double amount, string title);	//´æ¿î
-	bool withdraw(Date& date, double amount, string title);	//È¡¿î
-	bool settle(Date& date);								//ÓÚÖ¸¶¨ÈÕÆÚ½áËã
+	bool deposit(Date& date, double amount, string title);	//å­˜æ¬¾
+	bool withdraw(Date& date, double amount, string title);	//å–æ¬¾
+	bool settle(Date& date);								//äºæŒ‡å®šæ—¥æœŸç»“ç®—
 
 	const double getRate() const
 	{
