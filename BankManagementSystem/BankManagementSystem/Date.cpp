@@ -132,12 +132,3 @@ bool Date::operator<(const Date d) const
 		}
 	}
 }
-
-bool Date::read()
-{
-	cin >> inYear >> inMonth >> inDay;
-	return true;
-}
-int Date::inYear = 0;
-int Date::inMonth = 0;
-int Date::inDay = 0;

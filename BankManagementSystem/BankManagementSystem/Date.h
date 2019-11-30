@@ -7,7 +7,6 @@ class Date
 private:
 	int year, month, day;
 	int monthTable(int year, int month);
-	static int inYear, inMonth, inDay;
 public:
 	Date()
 	{
@@ -38,6 +37,5 @@ public:
 	}
 	bool dateChange(int y, int m, int d);
 	bool operator<(const Date d)const;
-	static bool read();
 };
 
