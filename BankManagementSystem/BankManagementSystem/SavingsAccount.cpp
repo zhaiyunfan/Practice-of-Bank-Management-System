@@ -2,7 +2,7 @@
 
 SavingsAccount::SavingsAccount(Date& inDate, string inId, double inRate):Account(inDate, inId),rate(inRate), acc(inDate, 0)
 {
-	cout << "#" << inId << " is created" << endl;
+	cout <<"Savings Account"<< "#" << inId << " is created" << endl;
 }
 
 
@@ -27,11 +27,18 @@ bool SavingsAccount::withdraw(Date& date, double amount, string title)
 
 bool SavingsAccount::settle(Date& date)
 {
-	double inteset = 0;
-	inteset += acc.cal(date) * rate / 365;
-	record(date, inteset,"settle");			//更新存入日期并将利息池的利息存入余额
-	acc.reset(date,getBalance());				//清空利息池
-	return true;
+	if (date.getMonth() == 1)
+	{
+		double inteset = 0;
+		inteset += acc.calSum(date) * rate / 365;
+		record(date, inteset, "settle");			//更新存入日期并将利息池的利息存入余额
+		acc.reset(date, getBalance());				//清空利息池
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool SavingsAccount::show()

@@ -7,6 +7,10 @@ private:
 	double creditLimit;
 	double rate;
 	double annualFee;
+	double getDebt() const
+	{
+		return (getBalance() >= 0 ? 0 : getBalance());
+	}
 public:
 	CreditAccount(Date& inDate, string inId, double inLimit,double inRate,double inFee);
 	bool deposit(Date& date, double amount, string title);	//´æ¿î

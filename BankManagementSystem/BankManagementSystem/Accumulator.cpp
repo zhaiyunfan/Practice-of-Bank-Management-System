@@ -1,13 +1,13 @@
 #include "Accumulator.h"
 
-double Accumulator::cal(Date& date)
+double Accumulator::calSum(Date& date)
 {
 	return sum + value * lastDate.distanceCal(date);
 }
 
 bool Accumulator::set(Date& date, double value)
 {
-	sum = cal(date);
+	sum = calSum(date);
 	lastDate = date;
 	this->value = value;
 	return true;

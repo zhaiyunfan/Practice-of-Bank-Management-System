@@ -14,7 +14,7 @@ public:
 		this->value = value;
 		sum = 0;
 	}
-	double cal(Date& date);
+	double calSum(Date& date);
 	bool set(Date& date, double value);
 	bool reset(Date& date, double value);
 };
