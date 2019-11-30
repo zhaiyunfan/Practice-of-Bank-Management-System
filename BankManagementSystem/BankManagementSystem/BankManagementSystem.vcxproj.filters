@@ -18,18 +18,36 @@
     <ClCompile Include="BankManagementSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Date.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SavingsAccount.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="Account.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Date.cpp">
+    <ClCompile Include="Accumulator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditAccount.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Date.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SavingsAccount.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="Account.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Date.h">
+    <ClInclude Include="Accumulator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditAccount.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
