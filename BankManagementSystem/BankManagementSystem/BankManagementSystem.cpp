@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <utility>
+#include<fstream>
 
 using namespace std;
 
@@ -56,16 +57,38 @@ int main() {
 			}
 			case'q':
 			{
-				cout << "press a date:" << endl;
-				int inYear, inMonth, inDay;
-				cin >> inYear >> inMonth >> inDay;
-				auto billIter = myBill.equal_range(Date(inYear, inMonth, inDay));
-				if (billIter.first != end(myBill))
+				cout << "press date number:" << endl;
+				int num;
+				cin >> num;
+				switch (num)
 				{
-					for (auto pr = billIter.first; pr != billIter.second; ++pr)
+				case 1:
+				{
+					cout << "press a date:" << endl;
+					auto billIter = myBill.equal_range(Date::read());
+					if (billIter.first != end(myBill))
 					{
-						cout << pr->second << endl;
+						for (auto pr = billIter.first; pr != billIter.second; ++pr)
+						{
+							cout << pr->second << endl;
+						}
 					}
+					break;
+				}
+				case 2:
+				{
+					cout << "press two date,smaller one and bigger one:" << endl;
+					auto iter1 = myBill.lower_bound(Date::read());
+					auto iter2 = myBill.upper_bound(Date::read());
+					if (iter1 != end(myBill))
+					{
+						for (auto iter = iter1; iter != iter2; ++iter)
+							std::cout << iter->second << endl;
+					}
+					break;
+				}				
+				default:
+					break;
 				}
 				break;
 			}
