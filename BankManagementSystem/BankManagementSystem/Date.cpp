@@ -97,7 +97,7 @@ Date Date::read()
 	int year, month, day;
 	char c;
 	cin >> year >> c >> month >> c >> day;
-	if (month > 12 || month < 1 || day<1 || day>(monthTable(month + 1, 1) - monthTable(month, 1)))
+	if (month > 12 || month < 1 || day<1 || day>(monthTable(year,month + 1) - monthTable(year,month)))
 	{
 		throw out_of_range("date enter error");
 	}

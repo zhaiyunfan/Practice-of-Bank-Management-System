@@ -19,17 +19,18 @@ int main()
 
 	cout << "Welcome to Bank-Management-System" << endl;
 	cout << "load last saving" << endl;
-	inPut.open("file.txt", ios::in);
+	inPut.open("file.txt");
 	fileLoad(date, inPut, accounts, myBill);
 	inPut.close();
 	
 	outPut.open("file.txt", ios::app | ios::out);
+	cout << "System load successful!" << endl;
 	cout << "Next is the operating instructions:" << endl;
 
 	char command;
 	string commandDeal;
-	bool isLoginin = false;
-	Account* p = NULL;
+	bool isLoginin = false;	//判断是否已经登录
+	Account* p = NULL;		//当前登录账户的指针
 	double myAmount;
 	string id, key, title;
 
@@ -39,6 +40,24 @@ int main()
 		cin.sync();
 		if (isLoginin)
 		{
+			if (p->getBalance() < 0)
+			{
+				cout << "Here are some debts to be paid" << endl;
+				p->show();
+			}
+				cout << "bill of this month" << endl;
+				auto iter1 = myBill.lower_bound(Date(date.getYear(), date.getMonth(), 1));
+				auto iter2 = myBill.upper_bound(date);
+				if (iter1 != end(myBill))
+				{
+					for (auto iter = iter1; iter != iter2; ++iter)
+					{
+						if ((iter->second).getId() == p->getId())
+						{
+							(iter->second).show();
+						}
+					}
+				}
 			cout << "(d)deposit (w)withdraw (s)show (q)query (c)change day (n)next month (o)logout" << endl;
 			try
 			{				
@@ -57,7 +76,7 @@ int main()
 			
 			switch (command)
 			{
-			case 'd':
+			case 'd':	//存款
 			{
 				cout << "press amount and title" << endl;
 				try
@@ -83,7 +102,7 @@ int main()
 				}
 				break;
 			}
-			case'w':
+			case'w':	//取款
 			{
 				cout << "press amount and title" << endl;
 				try
@@ -109,14 +128,14 @@ int main()
 				}
 				break;
 			}
-			case's':
+			case's':	//显示
 			{
 				p->show();
 				break;
 			}
-			case'q':
+			case'q':	//查询
 			{
-				cout << "press date number:" << endl;
+				cout << "press command number:\n1:check bill before one date\n2:check bill between two date\n3:check bill before two date with amount" << endl;
 				int num;
 				try
 				{
@@ -134,7 +153,7 @@ int main()
 				}
 				switch (num)
 				{
-				case 1:
+				case 1:	//以往查询
 				{
 					cout << "press a date:" << endl;
 					try
@@ -159,7 +178,7 @@ int main()
 						continue;
 					}					
 				}
-				case 2:
+				case 2:	//区间查询
 				{
 					cout << "press two date,smaller one and bigger one:" << endl;
 					try
@@ -184,14 +203,43 @@ int main()
 						cout << "date enter wrong,please enter two legal 20xx-xx-xx date" << endl;
 						continue;
 					}					
-				}				
+				}	
+				case 3:	//金额大小
+				{
+					vector<AccountBill> vec;
+					cout << "press two date,smaller one and bigger one:" << endl;
+					try
+					{
+						auto iter1 = myBill.lower_bound(Date::read());
+						auto iter2 = myBill.upper_bound(Date::read());						
+						if (iter1 != end(myBill))
+						{
+							vector<PAIR> vec(iter1, iter2);
+							sort(vec.begin(), vec.end(), cmpByValue);
+							for (auto iter = vec.begin(); iter != vec.end(); ++iter)
+							{
+								if ((iter->second).getId() == p->getId())
+								{
+									(iter->second).show();
+								}
+							}
+						}
+						break;
+					}
+					catch (const std::exception&)
+					{
+						getline(cin, commandDeal);
+						cout << "date enter wrong,please enter two legal 20xx-xx-xx date" << endl;
+						continue;
+					}
+				}
 				default:
 					cout << "wrong commnd, return to menu!" << endl;
 					break;
 				}
 				break;
 			}
-			case'c':
+			case'c':	//改变日期
 			{
 				cout << "press goal day:";
 				int myDay;
@@ -217,7 +265,7 @@ int main()
 				outPut << command << "\n" << myDay << endl;
 				break;
 			}
-			case'n':
+			case'n':	//下个月
 			{
 				if (date.getMonth() == 12)
 				{
@@ -253,7 +301,7 @@ int main()
 				}
 				break;
 			}
-			case'o':
+			case'o':	//注销
 			{
 				p = NULL;
 				isLoginin = false;
@@ -286,7 +334,7 @@ int main()
 			}			
 			switch (command)
 			{
-			case 'a':
+			case 'a':	//创建账户
 				cout << "please press id and key:" << endl;
 				cin >> id >> key;
 				iter = accounts.find(id);
@@ -335,7 +383,7 @@ int main()
 					}					
 				}
 				break;
-			case 'l':
+			case 'l':	//登录
 				cout << "please press id and key:" << endl;
 				cin >> id >> key;
 				iter = accounts.find(id);
