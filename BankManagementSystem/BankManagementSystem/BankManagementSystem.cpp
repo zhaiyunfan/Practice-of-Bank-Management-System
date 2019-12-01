@@ -7,7 +7,7 @@ int main()
 	cout.precision(2);
 	cout.setf(ios_base::fixed, ios_base::floatfield);
 
-	int oOri = 0;
+	int needLoad = 0;
 	ofstream outPut;	
 	ifstream inPut;
 
@@ -18,15 +18,11 @@ int main()
 	multimap<Date, AccountBill>myBill;
 
 	cout << "Welcome to Bank-Management-System" << endl;
-	cout << "do you want to load last saving?" << endl;
-	cout << "1 YES,0 NO" << endl;
-	cin >> oOri;
-	if (oOri == 1)
-	{
-		inPut.open("file.txt", ios::in);
-		fileLoad(date, inPut, accounts, myBill);
-		inPut.close();
-	}
+	cout << "load last saving" << endl;
+	inPut.open("file.txt", ios::in);
+	fileLoad(date, inPut, accounts, myBill);
+	inPut.close();
+	
 	outPut.open("file.txt", ios::app | ios::out);
 	cout << "Next is the operating instructions:" << endl;
 
@@ -36,8 +32,11 @@ int main()
 	Account* p = NULL;
 	double myAmount;
 	string id, key, title;
+
 	do
-	{		
+	{	
+		cin.clear();
+		cin.sync();
 		if (isLoginin)
 		{
 			cout << "(d)deposit (w)withdraw (s)show (q)query (c)change day (n)next month (o)logout" << endl;
@@ -153,9 +152,9 @@ int main()
 						}
 						break;
 					}
-					catch (AccoutException& error)
+					catch (const std::exception&)
 					{
-						error.show();
+						getline(cin, commandDeal);
 						cout << "date enter wrong,please enter a legal 20xx-xx-xx date" << endl;
 						continue;
 					}					
@@ -179,9 +178,9 @@ int main()
 						}
 						break;
 					}
-					catch (AccoutException& error)
+					catch (const std::exception&)
 					{
-						error.show();
+						getline(cin, commandDeal);
 						cout << "date enter wrong,please enter two legal 20xx-xx-xx date" << endl;
 						continue;
 					}					
@@ -367,8 +366,6 @@ int main()
 				break;
 			}
 		}
-		cin.clear();
-		cin.sync();
 	} while (command != 'e');
 	return 0;
 }
