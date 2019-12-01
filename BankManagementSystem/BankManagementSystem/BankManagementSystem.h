@@ -3,12 +3,14 @@
 #include "SavingsAccount.h"
 #include "CreditAccount.h"
 #include "AccountBill.h"
-#include "Controller.h"
+#include "AccoutException.h"
 #include <vector>
 #include <map>
 #include <utility>
 #include<fstream>
 #include<sstream>
+#include <stdexcept>
+
 using namespace std;
 
 bool fileLoad(Date&date,ifstream& inPut, map<string, Account*>& accounts, multimap<Date, AccountBill>& myBill)
@@ -21,8 +23,6 @@ bool fileLoad(Date&date,ifstream& inPut, map<string, Account*>& accounts, multim
 	string line;
 	while (!inPut.eof())
 	{
-
-
 		getline(inPut, command);
 		if (command == "a")
 		{

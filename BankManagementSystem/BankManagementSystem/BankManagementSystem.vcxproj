@@ -153,9 +153,9 @@
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="AccountBill.cpp" />
+    <ClCompile Include="AccoutException.cpp" />
     <ClCompile Include="Accumulator.cpp" />
     <ClCompile Include="BankManagementSystem.cpp" />
-    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="CreditAccount.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="SavingsAccount.cpp" />
@@ -163,9 +163,9 @@
   <ItemGroup>
     <ClInclude Include="Account.h" />
     <ClInclude Include="AccountBill.h" />
+    <ClInclude Include="AccoutException.h" />
     <ClInclude Include="Accumulator.h" />
     <ClInclude Include="BankManagementSystem.h" />
-    <ClInclude Include="Controller.h" />
     <ClInclude Include="CreditAccount.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="SavingsAccount.h" />

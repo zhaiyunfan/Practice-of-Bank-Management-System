@@ -1,10 +1,9 @@
 ﻿#include"BankManagementSystem.h"
 
-
 using namespace std;
 
-int main() {
-
+int main() 
+{
 	cout.precision(2);
 	cout.setf(ios_base::fixed, ios_base::floatfield);
 
@@ -32,6 +31,7 @@ int main() {
 	cout << "Next is the operating instructions:" << endl;
 
 	char command;
+	string commandDeal;
 	bool isLoginin = false;
 	Account* p = NULL;
 	double myAmount;
@@ -41,13 +41,40 @@ int main() {
 		if (isLoginin)
 		{
 			cout << "(d)deposit (w)withdraw (s)show (q)query (c)change day (n)next month (o)logout" << endl;
-			cin >> command;
+			try
+			{				
+				cin >> command;
+				getline(cin, commandDeal);
+				if (commandDeal.size() > 1)
+				{
+					throw runtime_error("command size error");
+				}
+			}
+			catch (const std::exception& )
+			{
+				cout << "command size overflow" << endl;
+				continue;
+			}
+			
 			switch (command)
 			{
 			case 'd':
 			{
 				cout << "press amount and title" << endl;
-				cin >> myAmount;
+				try
+				{
+					cin >> myAmount;
+					if (myAmount <= 0)
+					{
+						throw AccoutException("deposit wrong",p);
+					}
+				}
+				catch (AccoutException& error)
+				{
+					error.show();
+					cout << "should enter positive number" << endl;
+					continue;
+				}				
 				getchar();
 				getline(cin, title);
 				if (p->deposit(date, myAmount, title))
@@ -60,7 +87,20 @@ int main() {
 			case'w':
 			{
 				cout << "press amount and title" << endl;
-				cin >> myAmount;
+				try
+				{
+					cin >> myAmount;
+					if (myAmount <= 0)
+					{
+						throw AccoutException("withdraw wrong",p);
+					}
+				}
+				catch (AccoutException& error)
+				{
+					error.show();
+					cout << "should enter positive number" << endl;
+					continue;
+				}
 				getchar();
 				getline(cin, title);
 				if (p->withdraw(date, myAmount, title))
@@ -79,43 +119,75 @@ int main() {
 			{
 				cout << "press date number:" << endl;
 				int num;
-				cin >> num;
+				try
+				{
+					cin >> commandDeal;
+					if (commandDeal.size() > 1 || commandDeal == " ")
+					{
+						throw runtime_error("command size overflow");
+					}
+					num = commandDeal[0] - '0';
+				}
+				catch (const std::exception&)
+				{
+					cout << "command size overflow" << endl;
+					continue;
+				}
 				switch (num)
 				{
 				case 1:
 				{
 					cout << "press a date:" << endl;
-					auto billIter = myBill.equal_range(Date::read());
-					if (billIter.first != end(myBill))
+					try
 					{
-						for (auto pr = billIter.first; pr != billIter.second; ++pr)
+						auto billIter = myBill.equal_range(Date::read());
+						if (billIter.first != end(myBill))
 						{
-							if ((pr->second).getId() == p->getId()) 
+							for (auto pr = billIter.first; pr != billIter.second; ++pr)
 							{
-								(pr->second).show();
+								if ((pr->second).getId() == p->getId())
+								{
+									(pr->second).show();
+								}
 							}
 						}
+						break;
 					}
-					break;
+					catch (AccoutException& error)
+					{
+						error.show();
+						cout << "date enter wrong,please enter a legal 20xx-xx-xx date" << endl;
+						continue;
+					}					
 				}
 				case 2:
 				{
 					cout << "press two date,smaller one and bigger one:" << endl;
-					auto iter1 = myBill.lower_bound(Date::read());
-					auto iter2 = myBill.upper_bound(Date::read());
-					if (iter1 != end(myBill))
+					try
 					{
-						for (auto iter = iter1; iter != iter2; ++iter)
+						auto iter1 = myBill.lower_bound(Date::read());
+						auto iter2 = myBill.upper_bound(Date::read());
+						if (iter1 != end(myBill))
 						{
-							if ((iter->second).getId() == p->getId())
+							for (auto iter = iter1; iter != iter2; ++iter)
 							{
-								(iter->second).show();
+								if ((iter->second).getId() == p->getId())
+								{
+									(iter->second).show();
+								}
 							}
 						}
+						break;
 					}
-					break;
+					catch (AccoutException& error)
+					{
+						error.show();
+						cout << "date enter wrong,please enter two legal 20xx-xx-xx date" << endl;
+						continue;
+					}					
 				}				
 				default:
+					cout << "wrong commnd, return to menu!" << endl;
 					break;
 				}
 				break;
@@ -124,7 +196,19 @@ int main() {
 			{
 				cout << "press goal day:";
 				int myDay;
-				cin >> myDay;				
+				cin >> myDay;	
+				try
+				{
+					if (myDay > (date.monthTable(date.getYear(), date.getMonth() + 1) - date.monthTable(date.getYear(), date.getMonth())))
+					{
+						throw out_of_range("day out of range");
+					}
+				}
+				catch (const std::exception&)
+				{
+					cout << "date enter wrong,please enter two legal date" << endl;
+					continue;
+				}
 				if (!date.dateChange(date.getYear(), date.getMonth(), myDay))
 				{
 					cout << "can not return to previous day!" << endl;
@@ -187,7 +271,20 @@ int main() {
 		else
 		{
 			cout << "(a)add account (l)login (e)exit" << endl;
-			cin >> command;
+			try
+			{
+				cin >> command;
+				getline(cin, commandDeal);
+				if (commandDeal.size() > 1)
+				{
+					throw overflow_error("command size error");
+				}
+			}
+			catch (const std::exception& )
+			{				
+				cout << "command size overflow" << endl;
+				continue;
+			}			
 			switch (command)
 			{
 			case 'a':
@@ -202,7 +299,21 @@ int main() {
 				{
 					cout << "which type of Account?" << endl << "1.SavingsAccount\t2.CreditAccount" << endl;
 					int type;
-					cin >> type;
+					try
+					{
+						cin >> commandDeal;
+						if (commandDeal.size() > 1 || commandDeal == " ")
+						{
+							throw runtime_error("command size overflow");
+						}
+						type = commandDeal[0] - '0';
+					}
+					catch (const std::exception&)
+					{
+						cout << "command size overflow" << endl;
+						continue;
+					}
+					
 					switch (type)
 					{
 					case 1:

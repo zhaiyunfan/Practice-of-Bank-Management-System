@@ -6,7 +6,7 @@ class Date
 {
 private:
 	int year, month, day;
-	int monthTable(int year, int month);
+	
 public:
 	Date()
 	{
@@ -36,6 +36,7 @@ public:
 		return day;
 	}
 	static Date read();
+	static int monthTable(int year, int month);
 	bool dateChange(int y, int m, int d);
 	bool operator<(const Date d)const;
 };
