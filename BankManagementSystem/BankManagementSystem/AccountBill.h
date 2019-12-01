@@ -19,5 +19,9 @@ public:
 	{
 		return account->getId();
 	}
+	double getAmount()
+	{
+		return amount;
+	}
 };
 

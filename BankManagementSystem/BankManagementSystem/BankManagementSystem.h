@@ -7,11 +7,19 @@
 #include <vector>
 #include <map>
 #include <utility>
-#include<fstream>
-#include<sstream>
+#include <fstream>
+#include <sstream>
 #include <stdexcept>
+#include <algorithm>
 
 using namespace std;
+
+
+typedef pair<Date, AccountBill> PAIR;
+bool cmpByValue(PAIR& lhs, PAIR& rhs)
+{
+	return ((lhs.second).getAmount()) < ((rhs.second).getAmount());
+}
 
 bool fileLoad(Date&date,ifstream& inPut, map<string, Account*>& accounts, multimap<Date, AccountBill>& myBill)
 {
@@ -20,7 +28,12 @@ bool fileLoad(Date&date,ifstream& inPut, map<string, Account*>& accounts, multim
 
 	stringstream s;
 	string command;
-	string line;
+	string line; 
+
+	if (!inPut)
+	{
+		return false;
+	}
 	while (!inPut.eof())
 	{
 		getline(inPut, command);
