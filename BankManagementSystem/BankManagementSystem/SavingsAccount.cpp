@@ -17,7 +17,7 @@ bool SavingsAccount::withdraw(Date& date, double amount, string title)
 {
 	if (amount > getBalance())
 	{
-		cout << "几粒花生米啊？把你醉成这样了就？/n余额不足！" << endl;
+		cout << "几粒花生米啊？把你醉成这样了就？\n余额不足！" << endl;
 		return false;
 	}
 	record(date, -amount, title);				//更新存入日期并从余额取出

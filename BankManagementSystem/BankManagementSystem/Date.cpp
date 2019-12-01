@@ -95,7 +95,8 @@ int Date::monthTable(int year, int month)	//一个表，返回值normalYear为�
 Date Date::read()
 {
 	int year, month, day;
-	cin >> year >> month >> day;
+	char c;
+	cin >> year >> c >> month >> c >> day;
 	return Date(year, month, day);
 }
 
