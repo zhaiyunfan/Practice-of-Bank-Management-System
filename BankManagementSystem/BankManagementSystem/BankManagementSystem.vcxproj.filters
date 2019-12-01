@@ -36,7 +36,7 @@
     <ClCompile Include="AccountBill.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
+    <ClCompile Include="AccoutException.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,7 +62,7 @@
     <ClInclude Include="AccountBill.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Controller.h">
+    <ClInclude Include="AccoutException.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
