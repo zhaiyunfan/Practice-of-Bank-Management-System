@@ -35,6 +35,7 @@ public:
 	{
 		return day;
 	}
+	static Date read();
 	bool dateChange(int y, int m, int d);
 	bool operator<(const Date d)const;
 };

@@ -24,9 +24,8 @@ bool CreditAccount::withdraw(Date& date, double amount, string title)
 	{
 		record(date, -amount, title);
 		acc.set(date, getDebt());
-	}
-
-	return true;
+		return true;
+	}	
 }
 
 bool CreditAccount::settle(Date& date)

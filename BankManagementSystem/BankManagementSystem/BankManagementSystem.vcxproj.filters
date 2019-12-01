@@ -33,6 +33,12 @@
     <ClCompile Include="CreditAccount.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="AccountBill.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h">
@@ -51,6 +57,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="BankManagementSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountBill.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

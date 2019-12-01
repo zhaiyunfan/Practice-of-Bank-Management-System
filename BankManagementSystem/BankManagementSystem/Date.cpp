@@ -92,6 +92,14 @@ int Date::monthTable(int year, int month)	//一个表，返回值normalYear为�
 	return normalYear;
 }
 
+Date Date::read()
+{
+	int year, month, day;
+	char c;
+	cin >> year >> c >> month >> c >> day;
+	return Date(year, month, day);
+}
+
 bool Date::dateChange(int y, int m, int d)
 {
 	if (year < y || year == y && month < m || year == y && month == m && day < d)
