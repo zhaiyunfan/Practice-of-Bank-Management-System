@@ -13,7 +13,7 @@ private:
 	double balance;
 	static double total;
 public:
-	Account(Date& date, string id, string key);
+	Account(const Date& date, string id, string key);
 	bool record(Date& date, double amount, string title);
 	const string& getId() const
 	{

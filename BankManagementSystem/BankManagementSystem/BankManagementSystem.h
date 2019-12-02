@@ -18,7 +18,7 @@ using namespace std;
 typedef pair<Date, AccountBill> PAIR;
 bool cmpByValue(PAIR& lhs, PAIR& rhs)
 {
-	return ((lhs.second).getAmount()) < ((rhs.second).getAmount());
+	return (fabs((lhs.second).getAmount())) < fabs(((rhs.second).getAmount()));
 }
 
 bool fileLoad(Date&date,ifstream& inPut, map<string, Account*>& accounts, multimap<Date, AccountBill>& myBill)
@@ -32,8 +32,10 @@ bool fileLoad(Date&date,ifstream& inPut, map<string, Account*>& accounts, multim
 
 	if (!inPut)
 	{
+		cout << "NO BEFORE SAVING EXISTS,CREATING A NEW ONE..." << endl;
 		return false;
 	}
+	cout << "LOADING LAST SAVING..." << endl;
 	while (!inPut.eof())
 	{
 		getline(inPut, command);
@@ -142,5 +144,6 @@ bool fileLoad(Date&date,ifstream& inPut, map<string, Account*>& accounts, multim
 			cout << "now is" << date.getDateStr() << endl;
 		}
 	}
+
 	return true;
 }

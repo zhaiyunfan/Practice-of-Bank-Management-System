@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include"Date.h"
-//策略模式
+
 class Accumulator
 {
 private:

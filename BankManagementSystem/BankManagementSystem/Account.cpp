@@ -1,6 +1,6 @@
 ﻿#include "Account.h"
 
-Account::Account(Date& date, string id,string key)
+Account::Account(const Date& date, string id,string key)
 {
 	Account::id = id;
 	Account::key = key;

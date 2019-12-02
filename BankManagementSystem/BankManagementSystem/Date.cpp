@@ -22,7 +22,7 @@ int Date::distanceCal(Date& newDate)	//一个日期计算器，返回newDate与l
 	}
 	else
 	{
-		result += (monthTable(this->year, 12) + 31 - monthTable(this->year, this->month) - this->day);								//加上第一年剩下的日子
+		result += (monthTable(this->year, 12) + 31 - monthTable(this->year, this->month) - this->day);				//加上第一年剩下的日子
 		result += monthTable(newDate.year, newDate.month) + newDate.day;											//加上最后一年已度过的日子
 		if ((newDate.year % 400 == 0 || (newDate.year % 4 == 0 && newDate.year % 100 != 0)) && newDate.month <= 2)	//最后一年是闰年且过二月，+1
 		{
@@ -50,7 +50,7 @@ string Date::getDateStr()					//返回格式化的日期字符串
 	return result;
 }
 
-int Date::monthTable(int year, int month)	//一个表，返回值normalYear为所给年月的1日是该年的第(normalYear-1)天
+int Date::monthTable(int year, int month)	//一个表，返回值normalYear为所给年月的1日是该年的第(normalYear+1)天
 {
 	int normalYear = 0;
 	switch (month)
